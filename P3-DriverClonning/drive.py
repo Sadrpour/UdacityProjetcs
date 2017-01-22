@@ -21,6 +21,14 @@ from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_a
 import tensorflow as tf
 tf.python.control_flow_ops = tf
 
+def histogramEqualizer(im): 
+    img_yuv = cv2.cvtColor(im, cv2.COLOR_BGR2YUV)
+    # equalize the histogram of the Y channel
+    img_yuv = img_yuv.astype(np.uint8)
+    img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
+    img_yuv = img_yuv.astype(np.float32)
+    # convert the YUV image back to RGB format
+    return cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -39,18 +47,14 @@ def telemetry(sid, data):
     # The current image from the center camera of the car
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
-    image_array = np.asarray(image)
-    # print(image_array.shape)
-    # image_array = cv2.cvtColor(image_array,cv2.COLOR_BGR2GRAY)
-    # # image_array = cv2.equalizeHist(image_array)
-    # image_array = np.reshape(image_array,(160,320,1))[crop:, :, :]
-    # # print(image_array.shape)
-    # image_array = cv2.cvtColor(image_array[crop:,:,:],cv2.COLOR_RGB2HSV)
-    transformed_image_array = (image_array[None, crop:, :, :] - 0)/1.0
+    # image_array = histogramEqualizer(np.asarray(image)[crop:, :, :])
+    image_array = np.asarray(image)[crop:, :, :]
+    transformed_image_array = (image_array[None, :, :, :] - 0)/1.0
+
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
     steering_angle = float(model.predict(transformed_image_array, batch_size=1))
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
-    throttle = 0.2
+    throttle = 0.25
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 
