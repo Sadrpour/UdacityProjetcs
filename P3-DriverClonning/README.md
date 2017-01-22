@@ -14,9 +14,9 @@ The number of samples (batch size) is also a configurable parameter of the image
 
 
 ## Sample Images 
-[Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_43_20_478.jpg)
-[Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_00_946.jpg)
-[Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_54_661.jpg)
+![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_43_20_478.jpg)
+![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_00_946.jpg)
+![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_54_661.jpg)
 
 
 
