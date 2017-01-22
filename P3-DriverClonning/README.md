@@ -13,7 +13,7 @@ The response (steer angle) of left images are adjusted by a configurable value (
 The number of samples (batch size) is also a configurable parameter of the image generator.  
 
 
-## Sample Images 
+### Sample Images 
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_43_20_478.jpg)
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_00_946.jpg)
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_54_661.jpg)
@@ -41,11 +41,11 @@ was also applied to convolutional layers.
 Below is the summary of the model. The idea was to give it flexibility while keeping number of parameters low.
 
 
-## Model
+### Model
 ![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
 ![Model Training loss](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
 
-# Tracks
+### Tracks
 ![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/easyTrack.gif)
 ![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/hardTrack.gif)
 
@@ -55,7 +55,7 @@ The model was tested on the first track, and was observed to remain within the r
 The model fails on the second track, and i will working on improving that time permitting. 
 
 
-### notes for my personal understanding 
+#### notes for my personal understanding 
 
 lets assume i have:
 10000 training samples
@@ -71,7 +71,7 @@ samples_per_epoch controls when it is time to go to the next epoch.
 epoch controls (1) the total number of training samples which is approximately equal to samples_per_epoch times the nb_epoch (note this is unrelated to the size of the training data which is 10000) (2) when the model in evaluated by validation dataset. 
 
 
-# set of useful commands for this project
+#### set of useful commands for this project
 	python model.py --epoch 20 --darknessTransformation 1 histogramEqualization 0
 	python drive.py model.json
 	byzanz-record -d 30 --delay=50 -x 100 -y 120 -w 500 -h 400 easyTrack.gif
