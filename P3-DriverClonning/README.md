@@ -45,6 +45,7 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 ![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
 ![Model Training loss](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
 
+# Tracks
 ![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/easyTrack.gif)
 ![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/hardTrack.gif)
 
@@ -68,3 +69,11 @@ at this point, we will go to the next epoch. if we have given keras a validation
 training continues. in each epoch 128 samples are generated (by running the generator 4 times), model is updated 4 times in each epoch. So in total model has seen 128x10 training samples. In that sense,
 samples_per_epoch controls when it is time to go to the next epoch. 
 epoch controls (1) the total number of training samples which is approximately equal to samples_per_epoch times the nb_epoch (note this is unrelated to the size of the training data which is 10000) (2) when the model in evaluated by validation dataset. 
+
+
+# set of useful commands for this project
+python model.py --epoch 20 --darknessTransformation 1 histogramEqualization 0
+python drive.py model.json
+byzanz-record -d 30 --delay=50 -x 100 -y 120 -w 500 -h 400 easyTrack.gif
+watch -n 5 nvidia-smi
+
