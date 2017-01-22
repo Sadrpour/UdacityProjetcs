@@ -32,8 +32,9 @@ via a configurable parameter called crop.
 During trial and error with models, i noticed we can achieve reasonable driving with even tiny models
 (less than 200 variables with 1 convolutional layer). However, i also noticed that the performance was very
 sensitive to the training set. For example, the car would behave as expected in one trial, and then
-would behave quiite differently trial (trial = training model again). As i increased the size of the ,
-I was able to achieve more stable performance while keeping the number of parameters small. 
+would behave quite differently in a different trial (trial = training the model again on the same training set).
+As i increased the size of the model, i was able to achieve more stable performance while keeping the number of 
+parameters small. 
 
 Drop out was used to prevent over-fitting. 5% of the dataset was set aside for validation. a small regularization 
 was also applied to convolutional layers. 
@@ -42,12 +43,11 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 
 ## Model
 ![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
-![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
+![Model Training loss](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
 
 ### Tests
-The model was tested on the first track, and was observed to work as expected. The car remained on the road in 
-the entire duration of simulation.
-
+The model was tested on the first track, and was observed to remain within the road. 
+The model fails on the second track, and i will working on improving that time permitting. 
 
 
 ### notes for my personal understanding 
