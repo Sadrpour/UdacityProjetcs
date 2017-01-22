@@ -42,7 +42,7 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 
 ## Model
 ![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
-
+![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
 
 ### Tests
 The model was tested on the first track, and was observed to work as expected. The car remained on the road in 
