@@ -45,7 +45,9 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 ![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
 ![Model Training loss](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/training.png)
 
-![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/desktop-animation.gif)
+![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/easyTrack.gif)
+![testRun](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/hardTrack.gif)
+
 
 ### Tests
 The model was tested on the first track, and was observed to remain within the road. 
