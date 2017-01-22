@@ -72,8 +72,8 @@ epoch controls (1) the total number of training samples which is approximately e
 
 
 # set of useful commands for this project
-python model.py --epoch 20 --darknessTransformation 1 histogramEqualization 0
-python drive.py model.json
-byzanz-record -d 30 --delay=50 -x 100 -y 120 -w 500 -h 400 easyTrack.gif
-watch -n 5 nvidia-smi
+	python model.py --epoch 20 --darknessTransformation 1 histogramEqualization 0
+	python drive.py model.json
+	byzanz-record -d 30 --delay=50 -x 100 -y 120 -w 500 -h 400 easyTrack.gif
+	watch -n 5 nvidia-smi
 
