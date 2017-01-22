@@ -1,6 +1,7 @@
 from __future__ import division
 import os
 import numpy as np
+from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from keras.models import Model
 from keras.layers import Input, Dense
@@ -13,12 +14,13 @@ from keras.layers import Dropout, Lambda, Convolution2D, ELU, Reshape
 from keras.regularizers import l2, activity_l2
 from keras.layers import Conv2D, Flatten, MaxPooling2D, Activation, AveragePooling2D 
 import gc
+
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-# location of my data files 
-loc = '/media/pemfir/Data/UdacityProjects/Data/DriverClonning/data/'
+loc = '/media/pemfir/Data/UdacityProjects/Data/DriverClonning/data/' # location of my data files 
+
 # command line flags
-flags.DEFINE_string('training_file', loc + 'driving_log.csv', "Bottleneck features training file (.p)")
+flags.DEFINE_string('training_file', loc + 'driving_log.csv', "training file (.p)")
 flags.DEFINE_integer('epoch', 15, "number of epoches")
 flags.DEFINE_integer('batchSize', 100, "batch size")
 flags.DEFINE_integer('cropSize', 60, "number of pixels to cut from top (add this to drive.py too")
@@ -34,13 +36,20 @@ except Exception:
     print('could not find the files to delet ...')
 
 # breaking the training data into training and validation set
-from sklearn.model_selection import train_test_split
+
 df = pd.read_csv(FLAGS.training_file)
 df, dfValidation = train_test_split(df , test_size=0.05, random_state=100)
 
 
 # image generator 
-def generate_data(pos,im,df1,df0,steerAdjustment,crop,oversamplingCoef,batchSize):
+def generate_data(pos,
+                  im,
+                  df1,
+                  df0,
+                  steerAdjustment,
+                  crop,
+                  oversamplingCoef,
+                  batchSize):
     while(True):
         # samples with 0 steering were seperated from samples with nonzero steering
         # Also, i over-sampled images with nonzero steering 
@@ -55,11 +64,11 @@ def generate_data(pos,im,df1,df0,steerAdjustment,crop,oversamplingCoef,batchSize
             view = pos[np.random.choice(3)]
             # print(view)
             if view == 'left':
-                yBatch[i] = df3.iloc[i]['steering'] + steerAdjustment                
+                yBatch[i] = df3.iloc[i]['steering'] + steerAdjustment
             if view == 'center':
-                yBatch[i] = df3.iloc[i]['steering'] + 0               
+                yBatch[i] = df3.iloc[i]['steering'] + 0
             if view == 'right':
-                yBatch[i] = df3.iloc[i]['steering'] - steerAdjustment                
+                yBatch[i] = df3.iloc[i]['steering'] - steerAdjustment
             xBatch[i] = plt.imread(loc + str(df3.iloc[i][view]))[crop:,:,:]
         yield (xBatch,yBatch)
 
@@ -107,21 +116,21 @@ def main(_):
                                       FLAGS.steerAdjustment,
                                       crop,
                                       FLAGS.oversamplingCoef,
-                                      batchSize)
-                        , samples_per_epoch=(len(df) // batchSize) * batchSize
-                        , nb_epoch=FLAGS.epoch
-                        , verbose=1
-                        , validation_data=generate_data(pos,
+                                      batchSize),
+                        samples_per_epoch=(len(df) // batchSize) * batchSize,
+                        nb_epoch=FLAGS.epoch,
+                        verbose=1,
+                        validation_data=generate_data(
+                                      pos,
                                       im,
                                       dfValidation[dfValidation['steering']!=0],
                                       dfValidation[dfValidation['steering']==0],
                                       FLAGS.steerAdjustment,
                                       crop,
-                                      FLAGS.oversamplingCoef,
-                                      10)
-                        , nb_val_samples = 200)
+                                      10),
+                        nb_val_samples=200)
     # saving the model into memory
-    model.save_weights('model.h5')  # always save your weights after training or during training
+    model.save_weights('model.h5')  
     with open('model.json', 'w') as outfile:
         outfile.write(model.to_json())
     gc.collect()

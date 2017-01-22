@@ -35,7 +35,8 @@ sensitive to the training set. For example, the car would behave as expected in 
 would behave quiite differently trial (trial = training model again). As i increased the size of the ,
 I was able to achieve more stable performance while keeping the number of parameters small. 
 
-Drop out was used to prevent over-fitting. 5% of the dataset was set aside for validation.
+Drop out was used to prevent over-fitting. 5% of the dataset was set aside for validation. a small regularization 
+was also applied to convolutional layers. 
 Below is the summary of the model. The idea was to give it flexibility while keeping number of parameters low.
 
 
