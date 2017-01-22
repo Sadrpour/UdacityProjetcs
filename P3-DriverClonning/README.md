@@ -17,7 +17,7 @@ The number of samples (batch size) is also a configurable parameter of the image
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_43_20_478.jpg)
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_00_946.jpg)
 ![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_45_54_661.jpg)
-
+![Sample Image 1](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2017_01_13_18_27_19_925.jpg)
 
 
 ### Model structure
@@ -40,7 +40,7 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 
 
 ## Model
-[Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model)
+![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model)
 
 
 ### Tests
