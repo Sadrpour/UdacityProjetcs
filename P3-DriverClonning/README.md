@@ -13,6 +13,12 @@ The response (steer angle) of left images are adjusted by a configurable value (
 The number of samples (batch size) is also a configurable parameter of the image generator.  
 
 
+## Sample Images 
+	import matplotlib.pyplot as plt
+	import random
+	plt.imshow('https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/right_2016_12_01_13_43_20_478.jpg')
+
+
 ### Model structure
 to reduce the number of parameters the incoming images are (1) rescaled into a smaller size (2)
 cropped from the top. The rescaling of the image is incoporated within the first layer of the model.
@@ -33,7 +39,7 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 
 
 ## Model
-[![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model)]
+[Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model)
 
 
 ### Tests
