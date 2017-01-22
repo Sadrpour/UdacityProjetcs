@@ -40,7 +40,7 @@ Below is the summary of the model. The idea was to give it flexibility while kee
 
 
 ## Model
-![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model)
+![Model Architecture](https://github.com/Sadrpour/UdacityProjetcs/raw/master/P3-DriverClonning/model.png)
 
 
 ### Tests
