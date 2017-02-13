@@ -99,12 +99,10 @@ The result for this section can be found in Section 3 of my code under "Binary I
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-
+For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Please see images below for some samples from this process:
 
 image 1
 <img src="./projectImages/hist1.jpg" alt="alt text" width=600 height=300>
-
-<img src="./projectImages/boundingWindows1.jpg" alt="alt text" width=400 height=300>
 
 <img src="./projectImages/poly1.jpg" alt="alt text" width=600 height=300>
 
@@ -112,17 +110,16 @@ image 1
 image 2 
 <img src="./projectImages/hist2.jpg" alt="alt text" width=600 height=300>
 
-<img src="./projectImages/boundingWindows2.jpg" alt="alt text" width=400 height=300>
-
 <img src="./projectImages/poly2.jpg" alt="alt text" width=600 height=300>
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+The polynomial fits were implemented on the image scale. We then use a conversion, to map points along each lane in the image into real world scale (unit meter). a polynomial was then fit to the real-wrold points, and the closest point to the vehicle was chosen to calculate the curvature. the curvature was calculated according to the formula introduced in [Perspective Transformation](http://www.intmath.com/applications-differentiation/8-radius-curvature.php) as suggested in the course lectures. The curvature was then added to the final image. Based on the results and video implementation
+I think the curvature values are within acceptable range. 
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+All of the steps above was combined together into a single pipeline, which can be found in Section 4 of my code under "Final PipeLine". Images below show that the algorithm is able to identify the region of inetersted between the lane lines accurately. 
 
 <img src="./projectImages/final1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/final2.jpg" alt="alt text" width=400 height=300>
@@ -131,7 +128,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ###Pipeline (video)
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+####1. Here is a link to my video
 
 Here's a [link to my video result](./submission_video.mp4)
 
@@ -139,6 +136,4 @@ Here's a [link to my video result](./submission_video.mp4)
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+####1. The pipeline initially failed when another vehile started to approach from the right. I had to tune the perspective transformation to make sure it does not cover too much of the original image. We are mainly concerned with the area in front of the vehicle. I am also working on using the average of polynomial fits from multiple images instead of one to increase the smoothness of the lane detection. This was challenging because it was not clear how we can pass information from previous images to the current image. I am planning to use global variables for this. I spent alot of time on perspective transformation and gradients. I wish there was a better and faster way of doing this. This pipeline does not do well on more challenging videos.  
