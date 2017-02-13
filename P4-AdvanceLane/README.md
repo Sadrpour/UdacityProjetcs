@@ -102,7 +102,8 @@ The result for this section can be found in Section 3 of my code ubder "Binary I
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image7]
-![alt text][image9](./projectImages/boundingWindows.jpg =600x800)
+![alt text](./projectImages/boundingWindows.jpg = 600x800)
+<img src="./projectImages/boundingWindows.jpg" alt="alt text" width=400 height=300>
 
 
 ![alt text][image8]
