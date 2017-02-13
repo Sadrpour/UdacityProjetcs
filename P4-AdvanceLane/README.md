@@ -48,13 +48,14 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 <img src="./projectImages/undistorted.jpg" alt="alt text" width=400 height=300>
 
-The result for this section can be found in Section 1 of my code ubder "Camera Caliberation" and "Correcting Distortion"
+The result for this section can be found in Section 1 of my code under "Camera Caliberation" and "Correcting Distortion"
 
 
 ####2. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+I spent ours playing around with the src and dst point to get a reasonable mapping for the lanes. At the end the 4 points provided in the rubric beat my own tunning. One of the key factors was that the src points extended across the y-axis of the image. the offset parameter which is shown in the code snippet below controls how much of the original image is included in the perspective transform. The lower the number the more streched out the final image. This means less of the original image is going to be included in the final image. This was a key parameter to exclude excessive features from going into the model. For instnace if offset was larger, we would be including cars and lanes in which the car is not driving in. 
 
+The result for this section can be found in Section 2 of my code under "Perspective Transformation".
 ```
 offset = 290
 # in the cv2 transformation first dimension is x second is y 
@@ -79,12 +80,11 @@ This resulted in the following source and destination points:
 | 1127, 720     | 910, 720      |
 | 695, 460      | 910, 0        |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. See images below for some examples:
 
 <img src="./projectImages/perspective.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/perspective2.jpg" alt="alt text" width=400 height=300>
 
-The result for this section can be found in Section 2 of my code ubder "Perspective Transformation"
 
 ####3. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
@@ -95,18 +95,18 @@ I spent a lot of time playing around with various combinations of them. I also t
 <img src="./projectImages/binary.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
 
-The result for this section can be found in Section 3 of my code ubder "Binary Image Generation"
+The result for this section can be found in Section 3 of my code under "Binary Image Generation"
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+
 
 image 1
-<img src="./projectImages/hist.jpg" alt="alt text" width=600 height=300>
+<img src="./projectImages/hist1.jpg" alt="alt text" width=600 height=300>
 
-<img src="./projectImages/boundingWindows.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/boundingWindows1.jpg" alt="alt text" width=400 height=300>
 
-<img src="./projectImages/poly.jpg" alt="alt text" width=600 height=300>
+<img src="./projectImages/poly1.jpg" alt="alt text" width=600 height=300>
 
 
 image 2 
