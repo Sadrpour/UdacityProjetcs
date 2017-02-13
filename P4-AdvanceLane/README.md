@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./projectImages/camera.jpg "Camera Caliberation"
+[image1]: ./projectImages/camera.jpg=250x "Camera Caliberation"
 [image2]: ./projectImages/undistorted.jpg "Undistorted Chess"
 [image3]: ./projectImages/bindary.jpg "Binary Example 1"
 [image4]: ./projectImages/bindary2.jpg "Binary Example 2"
@@ -42,7 +42,7 @@ The goals / steps of this project are the following:
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-![alt text][image1=250x]
+![alt text][image1]
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result:
 
