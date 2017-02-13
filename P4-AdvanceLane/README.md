@@ -90,7 +90,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 The course provides us a vareity of tools for detecting lane lines in the images as follows: (1) gradient in x and y directions, (2) magnitute of gradient, (3) angle of gradient, (4) HSV and HLS color spaces.
 
-I spent a lot of time playing around with various combinations of them. I also took advantage of the office hours. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect line and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters. The 
+I spent a lot of time playing around with various combinations of them, but my tunning did not beat the tunning i saw during the office hours. So i ended up using that. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect line and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters.
 
 <img src="./projectImages/binary.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
@@ -102,14 +102,13 @@ The result for this section can be found in Section 3 of my code under "Binary I
 For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Please see images below for some samples from this process:
 
 image 1
+(a) Histogram of points (b) Fitted polynomial, sliding windows bounds, and point clouds
 <img src="./projectImages/hist1.jpg" alt="alt text" width=600 height=300>
-
 <img src="./projectImages/poly1.jpg" alt="alt text" width=600 height=300>
 
-
 image 2 
+(a) istogram of points (b) Fitted polynomial, sliding windows bounds, and point clouds
 <img src="./projectImages/hist2.jpg" alt="alt text" width=600 height=300>
-
 <img src="./projectImages/poly2.jpg" alt="alt text" width=600 height=300>
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
@@ -136,4 +135,4 @@ Here's a [link to my video result](./submission_video.mp4)
 
 ###Discussion
 
-####1. The pipeline initially failed when another vehile started to approach from the right. I had to tune the perspective transformation to make sure it does not cover too much of the original image. We are mainly concerned with the area in front of the vehicle. I am also working on using the average of polynomial fits from multiple images instead of one to increase the smoothness of the lane detection. This was challenging because it was not clear how we can pass information from previous images to the current image. I am planning to use global variables for this. I spent alot of time on perspective transformation and gradients. I wish there was a better and faster way of doing this. This pipeline does not do well on more challenging videos.  
+The pipeline initially failed when another vehile started to approach from the right. I had to tune the perspective transformation to make sure it does not cover too much of the original image. We are mainly concerned with the area in front of the vehicle. I am also working on using the average of polynomial fits from multiple images instead of one to increase the smoothness of the lane detection. This was challenging because it was not clear how we can pass information from previous images to the current image. I am planning to use global variables for this. I spent alot of time on perspective transformation and gradients. I wish there was a better and faster way of doing this. This pipeline does not do well on more challenging videos.  
