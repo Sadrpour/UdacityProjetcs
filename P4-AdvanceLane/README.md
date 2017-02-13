@@ -20,8 +20,8 @@ The goals / steps of this project are the following:
 
 [image1]: ./projectImages/camera.jpg "Camera Caliberation"
 [image2]: ./projectImages/undistorted.jpg "Undistorted Chess"
-[image3]: ./projectImages/bindary.jpg "Binary Example 1"
-[image4]: ./projectImages/bindary2.jpg "Binary Example 2"
+[image3]: ./projectImages/binary.jpg "Binary Example 1"
+[image4]: ./projectImages/binary2.jpg "Binary Example 2"
 [image5]: ./projectImages/perspective.jpg "Perspective Example 1"
 [image6]: ./projectImages/perspective2.jpg "Perspective Example 2"
 [image7]: ./projectImages/hist.jpg "Histogram Example 1"
@@ -42,11 +42,11 @@ The goals / steps of this project are the following:
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-![alt text](image1=250x)
+<img src="./projectImages/camera.jpg" alt="alt text" width=400 height=300>
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result:
 
-![alt text][image2]
+<img src="./projectImages/undistorted.jpg" alt="alt text" width=400 height=300>
 
 The result for this section can be found in Section 1 of my code ubder "Camera Caliberation" and "Correcting Distortion"
 
@@ -81,8 +81,8 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image5]
-![alt text][image6]
+<img src="./projectImages/perspective.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/perspective2.jpg" alt="alt text" width=400 height=300>
 
 The result for this section can be found in Section 2 of my code ubder "Perspective Transformation"
 
@@ -92,8 +92,8 @@ The course provides us a vareity of tools for detecting lane lines in the images
 
 I spent a lot of time playing around with various combinations of them. I also took advantage of the office hours. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect line and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters. The 
 
-![alt text][image3]
-![alt text][image4]
+<img src="./projectImages/binary.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
 
 The result for this section can be found in Section 3 of my code ubder "Binary Image Generation"
 
@@ -104,9 +104,11 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 <img src="./projectImages/hist.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/boundingWindows.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/poly.jpg" alt="alt text" width=400 height=300>
 
 <img src="./projectImages/hist2.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/boundingWindows2.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/poly2.jpg" alt="alt text" width=400 height=300>
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -116,8 +118,8 @@ I did this in lines # through # in my code in `my_other_file.py`
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image11]
-![alt text][image12]
+<img src="./projectImages/final1.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/final2.jpg" alt="alt text" width=400 height=300>
 
 ---
 
