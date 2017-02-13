@@ -102,19 +102,19 @@ The result for this section can be found in Section 3 of my code ubder "Binary I
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
 image 1
-<img src="./projectImages/hist.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/hist.jpg" alt="alt text" width=600 height=300>
 
 <img src="./projectImages/boundingWindows.jpg" alt="alt text" width=400 height=300>
 
-<img src="./projectImages/poly.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/poly.jpg" alt="alt text" width=600 height=300>
 
 
 image 2 
-<img src="./projectImages/hist2.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/hist2.jpg" alt="alt text" width=600 height=300>
 
 <img src="./projectImages/boundingWindows2.jpg" alt="alt text" width=400 height=300>
 
-<img src="./projectImages/poly2.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/poly2.jpg" alt="alt text" width=600 height=300>
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
