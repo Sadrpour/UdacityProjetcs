@@ -82,7 +82,7 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. See images below for some examples:
 
-<img src="./projectImages/perspective.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/perspective1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/perspective2.jpg" alt="alt text" width=400 height=300>
 
 
@@ -92,7 +92,7 @@ The course provides us a vareity of tools for detecting lane lines in the images
 
 I spent a lot of time playing around with various combinations of them, but my tunning did not beat the tunning i saw during the office hours. So i ended up using that. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect the lane lines and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters.
 
-<img src="./projectImages/binary.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/binary1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
 
 The result for this section can be found in Section 3 of my code under "Binary Image Generation"
