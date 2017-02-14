@@ -48,14 +48,14 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 <img src="./projectImages/undistorted.jpg" alt="alt text" width=400 height=300>
 
-The result for this section can be found in Section 1 of my code under "Camera Caliberation" and "Correcting Distortion"
+The result for this section can be found in Section 1 of my code under `Camera Caliberation` and `Correcting Distortion`
 
 
 ####2. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
 I spent hours playing around with the src and dst points to get a reasonable mapping for the lanes. in the end, the 4 points provided in the rubric beat my own src and dst points. One of the key factors was that the src points extended across the y-axis of the image. the offset parameter which is shown in the code snippet below controls how much of the original image is included in the perspective transform. The lower the number the more streched out the final image. This means less of the original image is going to be included in the final image. This was a key parameter to exclude excessive features from going into the model. For instnace if offset was larger, we would be including cars and lanes in which the car is not driving in. 
 
-The result for this section can be found in Section 2 of my code under "Perspective Transformation".
+The result for this section can be found in Section 2 of my code under `Perspective Transformation`.
 ```
 offset = 290
 # in the cv2 transformation first dimension is x second is y 
