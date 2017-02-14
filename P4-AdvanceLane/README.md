@@ -95,11 +95,11 @@ I spent a lot of time playing around with various combinations of them, but my t
 <img src="./projectImages/binary1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
 
-The result for this section can be found in Section 3 of my code under "Binary Image Generation"
+The result for this section can be found in Section 3 of my code under `Binary Image Generation`
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Finally a smoothing parameter was added that allowed me to draw the polynomial on the road using the average of n past polynomial fits rather than just the current one. The smoother is implemented in Section 4 of my code using the function "outlier_removal". This smoothed the lines and results looked more stable. 
+For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Finally a smoothing parameter was added that allowed me to draw the polynomial on the road using the average of n past polynomial fits rather than just the current one. The smoother is implemented in Section 4 of my code using the function `outlier_removal`. This smoothed the lines and results looked more stable. 
 
 
 
@@ -122,7 +122,7 @@ I think the curvature values are within acceptable range.
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-All of the steps above was combined together into a single pipeline (please find function "lineFinder" in Section 4 of my code). Before feeding the images to the pipeline they were undistored and warped accordingly.
+All of the steps above was combined together into a single pipeline (please find function `lineFinder` in Section 4 of my code). Before feeding the images to the pipeline they were undistored and warped accordingly.
 
 Images below show that the algorithm is able to identify the region of inetersted between the lane lines accurately. 
 
