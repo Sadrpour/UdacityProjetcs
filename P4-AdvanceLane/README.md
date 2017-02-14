@@ -26,8 +26,8 @@ The goals / steps of this project are the following:
 [image6]: ./projectImages/perspective2.jpg "Perspective Example 2"
 [image7]: ./projectImages/hist.jpg "Histogram Example 1"
 [image8]: ./projectImages/hist2.jpg "Histogram Example 2"
-[image9]: ./projectImages/boundingWindows.jpg "Bounding Windows 1"
-[image10=250x]: ./projectImages/boundingWindows2.jpg "Bounding Windows 2"
+[image9]: ./projectImages/boundingWindows.jpg "Bounding Windows for Lane Fitting 1"
+[image10=250x]: ./projectImages/boundingWindows2.jpg "Bounding Windows for Lane Fitting 2"
 [image11]: ./projectImages/final1.jpg "Final Output Example 1"
 [image12]: ./projectImages/final2.jpg "Final Output Example 2"
 [video1]: ./project_video.mp4 "Video"
@@ -53,7 +53,7 @@ The result for this section can be found in Section 1 of my code under "Camera C
 
 ####2. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-I spent ours playing around with the src and dst point to get a reasonable mapping for the lanes. At the end the 4 points provided in the rubric beat my own tunning. One of the key factors was that the src points extended across the y-axis of the image. the offset parameter which is shown in the code snippet below controls how much of the original image is included in the perspective transform. The lower the number the more streched out the final image. This means less of the original image is going to be included in the final image. This was a key parameter to exclude excessive features from going into the model. For instnace if offset was larger, we would be including cars and lanes in which the car is not driving in. 
+I spent hours playing around with the src and dst points to get a reasonable mapping for the lanes. in the end, the 4 points provided in the rubric beat my own src and dst points. One of the key factors was that the src points extended across the y-axis of the image. the offset parameter which is shown in the code snippet below controls how much of the original image is included in the perspective transform. The lower the number the more streched out the final image. This means less of the original image is going to be included in the final image. This was a key parameter to exclude excessive features from going into the model. For instnace if offset was larger, we would be including cars and lanes in which the car is not driving in. 
 
 The result for this section can be found in Section 2 of my code under "Perspective Transformation".
 ```
@@ -90,7 +90,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 The course provides us a vareity of tools for detecting lane lines in the images as follows: (1) gradient in x and y directions, (2) magnitute of gradient, (3) angle of gradient, (4) HSV and HLS color spaces.
 
-I spent a lot of time playing around with various combinations of them, but my tunning did not beat the tunning i saw during the office hours. So i ended up using that. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect line and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters.
+I spent a lot of time playing around with various combinations of them, but my tunning did not beat the tunning i saw during the office hours. So i ended up using that. The combination of (1) large x,y gradient OR (2) large saturation (HLS) and value (HSV) channels in the HLS and HSV transformation turned out to be the most useful to cleanly detect the lane lines and colors. I am still not sure why S and V channels were the most useful channels and not for example the hue. Below are two examples that demonstrates the filters.
 
 <img src="./projectImages/binary.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/binary2.jpg" alt="alt text" width=400 height=300>
@@ -99,7 +99,11 @@ The result for this section can be found in Section 3 of my code under "Binary I
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Please see images below for some samples from this process:
+For detecting lines i used the sliding window methodology introduced in the course lectures. A given image was sliced into 9 segments. A rectangular area was defined along each segment, for the left and right lanes. All the active pixels (non-zero) were identified inside each rectangle. A second order polynomial was fit into the point clouds. Finally a smoothing parameter was added that allowed me to draw the polynomial on the road using the average of n past polynomial fits rather than just the current one. The smoother is implemented in Section 4 of my code using the function "outlier_removal". This smoothed the lines and results looked more stable. 
+
+
+
+Please see images below for some samples from this process:
 
 image 1
 (a) Histogram of points (b) Fitted polynomial, sliding windows bounds, and point clouds
@@ -107,7 +111,7 @@ image 1
 <img src="./projectImages/poly1.jpg" alt="alt text" width=600 height=300>
 
 image 2 
-(a) istogram of points (b) Fitted polynomial, sliding windows bounds, and point clouds
+(a) Histogram of points (b) Fitted polynomial, sliding windows bounds, and point clouds
 <img src="./projectImages/hist2.jpg" alt="alt text" width=600 height=300>
 <img src="./projectImages/poly2.jpg" alt="alt text" width=600 height=300>
 
@@ -118,7 +122,9 @@ I think the curvature values are within acceptable range.
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-All of the steps above was combined together into a single pipeline, which can be found in Section 4 of my code under "Final PipeLine". Images below show that the algorithm is able to identify the region of inetersted between the lane lines accurately. 
+All of the steps above was combined together into a single pipeline (please find function "lineFinder" in Section 4 of my code). Before feeding the images to the pipeline they were undistored and warped accordingly.
+
+Images below show that the algorithm is able to identify the region of inetersted between the lane lines accurately. 
 
 <img src="./projectImages/final1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/final2.jpg" alt="alt text" width=400 height=300>
@@ -135,4 +141,4 @@ Here's a [link to my video result](./submission_video.mp4)
 
 ###Discussion
 
-The pipeline initially failed when another vehile started to approach from the right. I had to tune the perspective transformation to make sure it does not cover too much of the original image. We are mainly concerned with the area in front of the vehicle. I am also working on using the average of polynomial fits from multiple images instead of one to increase the smoothness of the lane detection. This was challenging because it was not clear how we can pass information from previous images to the current image. I am planning to use global variables for this. I spent alot of time on perspective transformation and gradients. I wish there was a better and faster way of doing this. This pipeline does not do well on more challenging videos.  
+The pipeline initially failed when another vehile started to approach from the right. I had to tune the perspective transformation to make sure it does not cover too much of the original image. We are mainly concerned with the area in front of the vehicle.  I spent alot of time on perspective transformation and gradients. I wish there was a better and faster way of doing this. This pipeline does not do well on more challenging videos. I also applied an outlier removal strategy to remove polynomial fits that were very different from their previous fits. This did not improve the result because polynomials have many degrees of freedom and i did not find any threshold that does well across the entire movie. 
