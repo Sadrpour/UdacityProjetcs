@@ -1,19 +1,9 @@
-# Vehicle Detection
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+##Writeup Template
+###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
 
-
-In this project, your goal is to write a software pipeline to detect vehicles in a video (start with the test_video.mp4 and later implement on full project_video.mp4), but the main output or product we want you to create is a detailed writeup of the project.  Check out the [writeup template](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup.  
-
-Creating a great writeup:
 ---
-A great writeup should include the rubric points as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
 
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You can submit your writeup in markdown or use another method and submit a pdf instead.
-
-The Project
----
+**Vehicle Detection Project**
 
 The goals / steps of this project are the following:
 
@@ -24,10 +14,114 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-Here are links to the labeled data for [vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and [non-vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip) examples to train your classifier.  These example images come from a combination of the [GTI vehicle image database](http://www.gti.ssr.upm.es/data/Vehicle_database.html), the [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/), and examples extracted from the project video itself.   You are welcome and encouraged to take advantage of the recently released [Udacity labeled dataset](https://github.com/udacity/self-driving-car/tree/master/annotations) to augment your training data.  
+[//]: # (Image References)
+[image1]: ./examples/car_not_car.png
+[image2]: ./examples/HOG_example.jpg
+[image3]: ./examples/sliding_windows.jpg
+[image4]: ./examples/sliding_window.jpg
+[image5]: ./examples/bboxes_and_heat.png
+[image6]: ./examples/labels_map.png
+[image7]: ./examples/output_bboxes.png
+[video1]: ./project_video.mp4
 
-Some example images for testing your pipeline on single frames are located in the `test_images` folder.  To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `ouput_images`, and include them in your writeup for the project by describing what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
+---
+###Writeup / README
 
-**As an optional challenge** Once you have a working pipeline for vehicle detection, add in your lane-finding algorithm from the last project to do simultaneous lane-finding and vehicle detection!
+###Histogram of Oriented Gradients (HOG)
 
-**If you're feeling ambitious** (also totally optional though), don't stop there!  We encourage you to go out and take video of your own, and show us how you would implement this project on a new video!
+####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+
+The code for this step is contained in the `Section 2: Hogs and Histogram Features` of the IPython notebook`.  
+
+For the purpose of demonstration, I started by reading 100 samples of `vehicle` and `non-vehicle` images. Then extracted the hogs features from the first layer of the RGB image of a car and a non-car image. Each image was selected randomly from a pool of 100 images. Along with the hogs features, i am also depicting the flattened out histogram of the images. The histogram extracts its values from all color channels of the images and concatnate them. 
+
+Images below depicts a few examples with the following parameters: (1) hist_bins = 16, (2) color_space = 'RGB', (3)  orient = 6, (4) pix_per_cell = 8, (5) cell_per_block = 2. 
+
+
+<img src="./projectImages/car.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/carhogs.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/carhist.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/notcar.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/notcarhogs.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/notcarhist.jpg" alt="alt text" width=400 height=300>
+
+
+![alt text][image2]
+
+####2. Explain how you settled on your final choice of HOG parameters.
+
+color spaces: i tried all the color spaces and tried them on the sample images, and YCrCb and LUV seem to be the most stable. I chose YCrCb. This was also recommended in the office hours.
+Hogs features: applying hogs features to all 3 image channels improved support vector classifier compared to only using 1 image channel
+Orientation: increasing orientation from around 6 to 9 bins in hogs transformation improved the accuracy of SVC
+Spatial sizes of (16,16) and (32,32) were experimented and (32,32) showed better accuracy in SVC
+histogram features: i went with the default value of 32
+for training hogs features, histogram and spatial sizing features were concatnated together to form a long vector of size 7284. For more details please see `Section 2: Hogs and Histogram Features` of my code.
+
+####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+
+Data was split to 80% for training and 20% for test.
+SVC tunning was done by playing with the following models
+
+Based on class recommendation:
+(1) svc = LinearSVC()
+To generate sparse features 
+(2) svc = LinearSVC(loss='l2', penalty='l1', dual=False,C = 100)
+To over-come overfitting we can reduce the penalty for slack variables 
+(3) svc = LinearSVC(C = 5E-5)
+To try non-linear fits i tried polynomial SVC
+(4) svc = svm.SVC(kernel= 'poly')
+
+i had similar results with l1 regularization or by tweeking C. I decided to go with the simpler model of  LinearSVC(C = 5E-5). The model gives me around 99% accuracy across both training and test set.
+Once i am done with tunning, i will use the entire data set to trian my final SVC model. For more details please see `Section 4: Training a Linear SVC model` of my code.  
+
+###Sliding Window Search
+
+####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+
+scale (or sliding window size) was another parameter that i spent considerable amount of time tunning. The smaller the scale the smaller the windows sizes because we stretch the original image. When i only used scales > 1, i was not be able to detect vehicles that were a bit further from the camera once in a while. So i decided to include one scale less than 1 and 3 scales larger than 1. Initially spent one day trying to find the right combination of scales, but eventually consulted with another student "Katharina". Her scales were above 1, but her methodology for tunning helped my tune my scale parameter. I applied different scales to the test images along with varying degree of heat threshold and made sure that the heat map is detecting all the vehicles in all images, while not allowing any noise (false detection). 
+
+anothe parameter for tunning was cells_per_step. The larger values means the we will have less windows and less overlaps. With scales smaller than 1, we can increase the step size to avoid having too many small windows. Below are result from applying each of the 4 scales individually to each image
+
+<img src="./projectImages/scale75.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/scale1.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/scale15.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/scale2.jpg" alt="alt text" width=400 height=300>
+
+Here we can combine all bounding boxes and apply them to the image. For more details and pictures please see `Section 6: Sliding windows tunning`
+
+<img src="./projectImages/scaleall.jpg" alt="alt text" width=400 height=300>
+
+####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+
+Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Below i am providing some samples of the above application in addition to the heat map results. 
+
+<img src="./projectImages/fourimagecombined1.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/fourimagecombined2.jpg" alt="alt text" width=400 height=300>
+---
+
+### Video Implementation
+
+####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+Here's a [link to my video result](./submission_video.mp4)
+
+
+####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+
+smoothing and averaging of frames: to make the result more stable and reduce false positive i tried two approaches. (1) exponential decay: in this approach i decayed the heatmap from previous slides by a factor named "forget_rate" between [0,1]. The calculation is as follows:  (1- forget_rate)*heat + forget_rate*headmapHistory. (2) averaging: i averaged the heat map from 10-15 frames. I results became more jittery with smaller number of frames, but with too many frames a false positive could last on the images for a longer period of time. 
+
+The images in the previous section included the heapmap across the test images. 
+
+
+
+
+
+---
+
+###Discussion
+
+####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+
+I spent 2 days just tunning parameters. This particularly was challenging because the video processing was very slow. It took more than 30 min for the project video to get processed. Also the tunning process was very manual. I first chopped the project video into smaller segments of 10 seconds in areas where i was facing problems, and ran my tunning on top of those smaller videos. Overall, i found a sweet spot that made tracking work well, but i think there has to be a better of doing this. I also think the class videos should cover (1) the tunning details and strategies more thoroughly (2) the python class functionality to track the vehicles. This information has been hard to find. 
+
