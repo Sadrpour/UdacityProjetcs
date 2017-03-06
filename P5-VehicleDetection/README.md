@@ -61,7 +61,12 @@ Once i am done with tunning, i will use the entire data set to trian my final SV
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-scale (or sliding window size) was another parameter that i spent considerable amount of time tunning. The smaller the scale the smaller the windows sizes because we stretch the original image. When i only used scales > 1, i was not be able to detect vehicles that were further from the camera occasionally. So i decided to include one scale less than 1 and 3 scales larger than 1. Initially spent one day trying to find the right combination of scales, but eventually consulted with another student "Katharina". Her scales were above 1, but her methodology for tunning helped my tune my scale parameter. I applied different scales to the test images along with varying degree of heat threshold and made sure that the heat map is detecting all the vehicles in all images, while not allowing any noise (false detection). 
+scale (or sliding window size) was another parameter that i spent considerable amount of time tunning. The smaller the scale the smaller the windows sizes because we stretch the original image. When i only used scales > 1, i was not be able to detect vehicles that were further from the camera occasionally. So i decided to include one scale less than 1 and 3 scales larger than 1. Initially spent one day trying to find the right combination of scales, but eventually consulted with another student "Katharina". Her scales were above 1, but her methodology for tunning helped my tune my scale parameter. I applied different scales to the test images along with varying degree of heat threshold and made sure that the heat map is detecting all the vehicles in all images, while not allowing any noise (false detection). The following are the sliding window parameter in my pipeline. The y axis is cut to remove the top portion (sky). 
+
+    ystartVector = [381, 382, 383, 384]
+    ystopVector = [651, 652, 653, 654]
+    scaleVector = [2.0, 1.5, 1.0, 0.75]
+    cells_per_stepVector = [2, 2, 2, 4]
 
 Here the challenges were (1) tracking all the car (2) reducing false positives. Often these two competed against each other. for example by making windows smaller or changing them, i could detect cars more easily but also i would detect noise more easily. 
 
