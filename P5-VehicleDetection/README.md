@@ -29,10 +29,10 @@ For the purpose of demonstration, I started by reading 100 samples of `vehicle` 
 Images below depicts a few examples with the following parameters (1) hist_bins: 16, (2) color_space: 'RGB', (3) orient: 6, (4) pix_per_cell: 8, (5) cell_per_block: 2. 
 
 
-<img src="./projectImages/carhogs.jpg" alt="alt text" width=100 height=100>
-<img src="./projectImages/carhist.jpg" alt="alt text" width=100 height=100>
-<img src="./projectImages/notcarhogs.jpg" alt="alt text" width=100 height=100>
-<img src="./projectImages/notcarhist.jpg" alt="alt text" width=100 height=100>
+<img src="./projectImages/carhogs.jpg" alt="alt text" width=300 height=300>
+<img src="./projectImages/carhist.jpg" alt="alt text" width=300 height=300>
+<img src="./projectImages/notcarhogs.jpg" alt="alt text" width=300 height=300>
+<img src="./projectImages/notcarhist.jpg" alt="alt text" width=300 height=300>
 
 
 ![alt text][image2]
