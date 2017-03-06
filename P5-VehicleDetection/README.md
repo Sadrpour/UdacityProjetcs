@@ -80,9 +80,9 @@ Here we can combine all bounding boxes and apply them to the image. For more det
 
 Ultimately I searched on 4 scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Below i am providing some samples of the above application in addition to the heat map results and histogram of heatmap for values larger than 0. I used this histogram to find the right threshold for my heatmap filter. 
 
-<img src="./projectImages/fourimagecombined1.jpg" alt="alt text" width=400 height=300>
-<img src="./projectImages/fourimagecombined2.jpg" alt="alt text" width=400 height=300>
-<img src="./projectImages/fourimagecombined3.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/fourimagecombined1.jpg" alt="alt text" width=800 height=600>
+<img src="./projectImages/fourimagecombined2.jpg" alt="alt text" width=800 height=600>
+<img src="./projectImages/fourimagecombined3.jpg" alt="alt text" width=800 height=600>
 ---
 
 ### Video Implementation
