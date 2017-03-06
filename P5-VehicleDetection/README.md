@@ -14,15 +14,6 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-[//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
 
 ---
 ###Writeup / README
@@ -38,11 +29,12 @@ For the purpose of demonstration, I started by reading 100 samples of `vehicle` 
 Images below depicts a few examples with the following parameters: (1) hist_bins = 16, (2) color_space = 'RGB', (3)  orient = 6, (4) pix_per_cell = 8, (5) cell_per_block = 2. 
 
 
-<img src="./projectImages/car.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/carhogs.jpg" alt="alt text" width=400 height=300>
+
 <img src="./projectImages/carhist.jpg" alt="alt text" width=400 height=300>
-<img src="./projectImages/notcar.jpg" alt="alt text" width=400 height=300>
+
 <img src="./projectImages/notcarhogs.jpg" alt="alt text" width=400 height=300>
+
 <img src="./projectImages/notcarhist.jpg" alt="alt text" width=400 height=300>
 
 
