@@ -26,16 +26,13 @@ The code for this step is contained in the `Section 2: Hogs and Histogram Featur
 
 For the purpose of demonstration, I started by reading 100 samples of `vehicle` and `non-vehicle` images. Then extracted the hogs features from the first layer of the RGB image of a car and a non-car image. Each image was selected randomly from a pool of 100 images. Along with the hogs features, i am also depicting the flattened out histogram of the images. The histogram extracts its values from all color channels of the images and concatnate them. 
 
-Images below depicts a few examples with the following parameters: (1) hist_bins = 16, (2) color_space = 'RGB', (3)  orient = 6, (4) pix_per_cell = 8, (5) cell_per_block = 2. 
+Images below depicts a few examples with the following parameters (1) hist_bins: 16, (2) color_space: 'RGB', (3) orient: 6, (4) pix_per_cell: 8, (5) cell_per_block: 2. 
 
 
-<img src="./projectImages/carhogs.jpg" alt="alt text" width=400 height=300>
-
-<img src="./projectImages/carhist.jpg" alt="alt text" width=400 height=300>
-
-<img src="./projectImages/notcarhogs.jpg" alt="alt text" width=400 height=300>
-
-<img src="./projectImages/notcarhist.jpg" alt="alt text" width=400 height=300>
+<img src="./projectImages/carhogs.jpg" alt="alt text" width=100 height=100>
+<img src="./projectImages/carhist.jpg" alt="alt text" width=100 height=100>
+<img src="./projectImages/notcarhogs.jpg" alt="alt text" width=100 height=100>
+<img src="./projectImages/notcarhist.jpg" alt="alt text" width=100 height=100>
 
 
 ![alt text][image2]
