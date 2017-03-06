@@ -78,7 +78,7 @@ Here we can combine all bounding boxes and apply them to the image. For more det
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on 4 scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Below i am providing some samples of the above application in addition to the heat map results. 
+Ultimately I searched on 4 scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Below i am providing some samples of the above application in addition to the heat map results and histogram of heatmap for values larger than 0. I used this histogram to find the right threshold for my heatmap filter. 
 
 <img src="./projectImages/fourimagecombined1.jpg" alt="alt text" width=400 height=300>
 <img src="./projectImages/fourimagecombined2.jpg" alt="alt text" width=400 height=300>
@@ -88,6 +88,7 @@ Ultimately I searched on 4 scales using YCrCb 3-channel HOG features plus spatia
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+for more details please see `Section 5: Video Pipline & HeatMap Diagnosis`
 Here's a [link to my video result](./submission_video.mp4)
 
 
@@ -96,7 +97,7 @@ Here's a [link to my video result](./submission_video.mp4)
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
 smoothing and averaging of frames: to make the result more stable and reduce false positive i tried two approaches: 
-* exponential decay: in this approach i decayed the heatmap from previous slides by a factor named "forget_rate" between [0,1]. The calculation is as follows:  (1- forget_rate)*heat + forget_rate*headmapHistory. 
+* exponential decay: in this approach i decayed the heatmap from previous slides by a factor named "forget_rate" between [0,1]. The calculation is as follows:  (1- forget_rate)x(heat) + (forget_rate)x(headmapHistory). 
 * averaging: i averaged the heat map from 10-15 frames. I results became more jittery with smaller number of frames, but with too many frames a false positive could last on the images for a longer period of time. 
 
 The images in the previous section included the heapmap across the test images. 
